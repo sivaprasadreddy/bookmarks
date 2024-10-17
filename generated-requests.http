@@ -1,0 +1,58 @@
+### Get all bookmarks
+GET http://localhost:8080/api/bookmarks
+
+> {%
+    client.test("Should get bookmarks successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Get bookmark by id
+GET http://localhost:8080/api/bookmarks/1
+
+> {%
+    client.test("Should get bookmark successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+
+### Create bookmark successfully
+POST http://localhost:8080/api/bookmarks
+Content-Type: application/json
+
+{
+  "title": "Kotlin Docs",
+  "url": "https://kotlinlang.org/docs/"
+}
+
+> {%
+    client.test("Should create bookmark successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+%}
+
+### Update bookmark successfully
+PUT http://localhost:8080/api/bookmarks/3
+Content-Type: application/json
+
+{
+  "title": "Kotlin Documentation",
+  "url": "https://kotlinlang.org/docs/home.html"
+}
+
+> {%
+    client.test("Should update bookmark successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+
+### Delete bookmark successfully
+DELETE http://localhost:8080/api/bookmarks/3
+
+> {%
+    client.test("Should delete bookmark successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
