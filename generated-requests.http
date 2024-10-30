@@ -32,6 +32,21 @@ Content-Type: application/json
     });
 %}
 
+### Create bookmark - Bad Request
+POST http://localhost:8080/api/bookmarks
+Content-Type: application/json
+
+{
+  "title": "",
+  "url": "https://kotlinlang.org/docs/"
+}
+
+> {%
+    client.test("Should return 400", function () {
+        client.assert(response.status === 400, "Response status is not 400");
+    });
+%}
+
 ### Update bookmark successfully
 PUT http://localhost:8080/api/bookmarks/3
 Content-Type: application/json
@@ -47,9 +62,23 @@ Content-Type: application/json
     });
 %}
 
+### Update bookmark - Bad Request
+PUT http://localhost:8080/api/bookmarks/352
+Content-Type: application/json
+
+{
+  "title": "Kotlin Documentation",
+  "url": ""
+}
+
+> {%
+    client.test("Should return 400", function () {
+        client.assert(response.status === 400, "Response status is not 400");
+    });
+%}
 
 ### Delete bookmark successfully
-DELETE http://localhost:8080/api/bookmarks/3
+DELETE http://localhost:8080/api/bookmarks/352
 
 > {%
     client.test("Should delete bookmark successfully", function () {
