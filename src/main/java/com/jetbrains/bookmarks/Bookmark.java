@@ -26,6 +26,17 @@ public class Bookmark {
     @Column(name = "url", nullable = false, length = 500)
     private String url;
 
+    @ColumnDefault("'DRAFT'")
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @Column(name = "published_at")
+    private Instant publishedAt;
+
     @NotNull
     @ColumnDefault("now()")
     @Column(name = "created_at", nullable = false)
@@ -56,6 +67,30 @@ public class Bookmark {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Instant getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(Instant publishedAt) {
+        this.publishedAt = publishedAt;
     }
 
     public Instant getCreatedAt() {
