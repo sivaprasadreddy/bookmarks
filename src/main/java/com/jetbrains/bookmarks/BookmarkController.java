@@ -40,10 +40,7 @@ class BookmarkController {
     @PostMapping
     ResponseEntity<Void> createBookmark(
             @Valid @RequestBody CreateBookmarkPayload payload) {
-        var bookmark = new Bookmark();
-        bookmark.setTitle(payload.title());
-        bookmark.setUrl(payload.url());
-        bookmark.setCreatedAt(Instant.now());
+        var bookmark = new Bookmark(payload.title(), payload.url());
         var savedBookmark = bookmarkRepository.save(bookmark);
         var url = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

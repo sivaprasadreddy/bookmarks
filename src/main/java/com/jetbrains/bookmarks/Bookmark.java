@@ -45,6 +45,16 @@ public class Bookmark {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    public Bookmark() {
+    }
+
+    public Bookmark(String title, String url) {
+        this.title = title;
+        this.url = url;
+        this.status = "DRAFT";
+        this.createdAt = Instant.now();
+    }
+
     public Long getId() {
         return id;
     }
